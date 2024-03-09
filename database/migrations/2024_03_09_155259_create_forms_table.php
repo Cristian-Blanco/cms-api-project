@@ -17,6 +17,17 @@ return new class extends Migration
             $table->string('route');
             $table->timestamps();
         });
+
+        DB::table('forms')->insert([
+            [
+                'name' => 'Articulos',
+                'route' => 'articles'
+            ],
+            [
+                'name' => 'Roles',
+                'route' => 'roles'
+            ],
+        ]);
     }
 
     /**
