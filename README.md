@@ -1,0 +1,4 @@
+- composer install
+- configurate .env
+- php artisan migrate
+- php artisan passport:install
