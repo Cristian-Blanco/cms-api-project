@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'update.profile' => \App\Http\Middleware\Auth\UpdateData::class,
         'permissions.role' => \App\Http\Middleware\Auth\PermissionsRole::class,
         //FORMS
-        'role.resource' => \App\Http\Middleware\CRUD\RoleResource\RoleValidate::class
+        'role.resource' => \App\Http\Middleware\CRUD\RoleResource\RoleValidate::class,
+        'article.resource' => \App\Http\Middleware\CRUD\ArticleResource\ArticleValidate::class,
     ];
 }

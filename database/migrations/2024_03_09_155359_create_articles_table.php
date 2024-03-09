@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('image');
-            $table->string('video');
+            $table->string('image')->nullable();
+            $table->string('video')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->unsignedBigInteger('user_create_id')->nullable();
