@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class UpdateResource implements CRUD
 {
@@ -15,6 +16,19 @@ class UpdateResource implements CRUD
     {
         DB::beginTransaction();
         try {
+            $role = Role::findOrFail($roleId);
+
+            $role->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'tag' => $request->input('tag'),
+            ]);
+
+            $role->permissions()->sync($request->input('permissions'));
+
+            $role->forms()->sync($request->input('forms'));
+
+            $role->users()->sync($request->input('users'));
 
             DB::commit();
             return response()->json(['message' => 'Successful']);

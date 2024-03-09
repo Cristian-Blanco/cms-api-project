@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 class CreateResource implements CRUD
 {
@@ -15,6 +16,20 @@ class CreateResource implements CRUD
     {
         DB::beginTransaction();
         try {
+            $userId = Auth::id();
+
+            $role = Role::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'tag' => $request->input('tag'),
+                'user_create_id' => $userId,
+            ]);
+
+            $role->permissions()->attach($request->input('permissions'));
+
+            $role->forms()->attach($request->input('forms'));
+
+            $role->users()->attach($request->input('users'));
 
             DB::commit();
             return response()->json(['message' => 'Successful']);

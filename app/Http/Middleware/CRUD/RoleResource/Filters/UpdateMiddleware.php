@@ -10,6 +10,16 @@ class UpdateMiddleware implements ValidateData
 {
     public function validate(Request $request)
     {
+        $additionalRules = [
+            'role_id' => 'required|integer|exists:roles,id',
+        ];
+
+        $validator = Validator::make($request->all(), ValidationRules::getRules($additionalRules));
+
+        if ($validator->fails()){
+            return ['error' => TRUE, 'message' => $validator->errors()];
+        }
+
         return ['error' => FALSE];
     }
 }

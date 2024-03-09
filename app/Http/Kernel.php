@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'login' => \App\Http\Middleware\Auth\Login::class,
         'signup' => \App\Http\Middleware\Auth\SignUp::class,
         'update.profile' => \App\Http\Middleware\Auth\UpdateData::class,
+        'permissions.role' => \App\Http\Middleware\Auth\PermissionsRole::class,
         //FORMS
         'role.resource' => \App\Http\Middleware\CRUD\RoleResource\RoleValidate::class
     ];
