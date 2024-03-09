@@ -18,10 +18,10 @@ class PermissionsRole
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         //Get the current route
         $route = $request->route()->getName();
         $method = $request->method();
-
         // Get the user
         $user = Auth::user();
 
@@ -29,14 +29,14 @@ class PermissionsRole
         $role = $user->roles()->whereHas('forms', function ($query) use ($route) {
             $query->where('route', $route);
         })->first();
-        
+
         if (!$role) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
 
         // Get the permissions with rol
         $permissions = $role->permissions->pluck('name');
-        
+
         // Check if the role has the necessary permissions for the requested method
         $requiredPermissions = $this->getRequiredPermissionsForMethod($method);
         

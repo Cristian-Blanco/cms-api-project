@@ -17,8 +17,8 @@ return new class extends Migration
 
             $table->primary(['form_id', 'role_id']);
 
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
         });
     }

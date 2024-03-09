@@ -9,7 +9,7 @@ use App\Http\Middleware\CRUD\ValidateDataMiddlewareContext;
 use App\Http\Middleware\CRUD\RoleResource\Filters\CreateMiddleware;
 use App\Http\Middleware\CRUD\RoleResource\Filters\ReadMiddleware;
 use App\Http\Middleware\CRUD\RoleResource\Filters\UpdateMiddleware;
-use App\Http\Middleware\CRUD\RoleResource\Filters\DeleteResource;
+use App\Http\Middleware\CRUD\RoleResource\Filters\DeleteMiddleware;
 
 class RoleValidate
 {

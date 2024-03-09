@@ -16,20 +16,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //Insert forms
-        DB::table('forms')->insertOrIgnore([
-            ['name' => 'Roles', 'route' => 'roles'],
-            ['name' => 'Articulo', 'route' => 'articles'],
-        ]);
-
-        //Insert permissions
-        DB::table('permissions')->insert([
-            ['name' => 'create'],
-            ['name' => 'read'],
-            ['name' => 'update'],
-            ['name' => 'delete'],
-        ]);
-
         // Insert admin user with superadmin role
         $admin = User::create([
             'fullname' => 'Admin',
@@ -46,16 +32,23 @@ return new class extends Migration
             'user_create_id' => $admin->id
         ]);
 
-        //Attach Permissions to superadmin role
-        $permissions = Permission::all();
-        $superadmin->permissions()->attach($permissions);
+        DB::table('permission_role')->insert([
+            ['permission_id' => 1, 'role_id' => 1], 
+            ['permission_id' => 2, 'role_id' => 1],
+            ['permission_id' => 3, 'role_id' => 1],
+            ['permission_id' => 4, 'role_id' => 1],
+        ]);
 
         // Attach forms to superadmin role
-        $forms = Form::whereIn('route', ['roles', 'articles'])->get();
-        $superadmin->forms()->attach($forms);
+        DB::table('form_role')->insert([
+            ['form_id' => 1, 'role_id' => 1], 
+            ['form_id' => 2, 'role_id' => 1],
+        ]);
 
-        // Attach superadmin role to admin user
-        $admin->roles()->attach($superadmin);
+        // // Attach superadmin role to admin user
+        DB::table('role_user')->insert([
+            ['role_id' => 1, 'user_id' => 1], 
+        ]);
     }
 
     /**
@@ -63,13 +56,14 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         DB::table('permission_role')->truncate();
         DB::table('form_role')->truncate();
         DB::table('role_user')->truncate();
-
-        DB::table('permissions')->truncate();
-        DB::table('forms')->truncate();
         DB::table('roles')->truncate();
         DB::table('users')->truncate();
+
+        Schema::enableForeignKeyConstraints();
     }
 };

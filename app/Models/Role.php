@@ -24,17 +24,17 @@ class Role extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->onDelete('cascade');;
+        return $this->belongsToMany(User::class);
     }
 
     public function forms(): BelongsToMany
     {
-        return $this->belongsToMany(Form::class)->onDelete('cascade');;
+        return $this->belongsToMany(Form::class);
     }
 
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class)->onDelete('cascade');;
+        return $this->belongsToMany(Permission::class);
     }
 
     public function userCreate(): BelongsTo

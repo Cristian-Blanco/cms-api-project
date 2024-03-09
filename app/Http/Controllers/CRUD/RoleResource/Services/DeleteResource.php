@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CRUD\RoleResource\Services;
 
 use App\Http\Controllers\CRUD\Interfaces\CRUD;
+use App\Http\Controllers\CRUD\Interfaces\RecordOperations;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
@@ -39,7 +40,7 @@ class DeleteResource implements CRUD, RecordOperations
     public function allRecords($ids = [])
     {
         try {
-            foreach ($roleIds as $roleId) {
+            foreach ($ids as $roleId) {
                 $role = Role::findOrFail($roleId);
                 $role->delete();
             }

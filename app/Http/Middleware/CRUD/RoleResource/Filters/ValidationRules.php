@@ -15,11 +15,11 @@ class ValidationRules
             'tag' => 'required|string|min:3|max:25|regex:'.$regex,
 
             // Permissions
-            'permissions' => ['required', 'array'],
+            'permissions' => ['array'],
             'permissions.*' => ['exists:permissions,id'],
 
             // Forms
-            'forms' => ['required', 'array'],
+            'forms' => ['array'],
             'forms.*' => ['exists:forms,id'],
 
             // Users

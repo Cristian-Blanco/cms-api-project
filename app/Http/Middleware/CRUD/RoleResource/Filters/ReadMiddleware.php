@@ -11,7 +11,7 @@ class ReadMiddleware implements ValidateData
     public function validate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'role_id' => 'required|integer|exists:roles,id',
+            'role_id' => 'integer|exists:roles,id',
         ]);
 
         if ($validator->fails()){

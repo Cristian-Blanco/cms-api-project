@@ -16,12 +16,14 @@ class UpdateResource implements CRUD
     {
         DB::beginTransaction();
         try {
-            $role = Role::findOrFail($roleId);
+            $userId = Auth::id();
+            $role = Role::findOrFail($request->input('role_id'));
 
             $role->update([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'tag' => $request->input('tag'),
+                'user_update_id' => $userId,
             ]);
 
             $role->permissions()->sync($request->input('permissions'));
