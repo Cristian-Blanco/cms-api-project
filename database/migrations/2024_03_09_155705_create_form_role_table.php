@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('form_role', function (Blueprint $table) {
-            $table->unsignedBigInteger('form_id')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
+            $table->unsignedBigInteger('form_id');
+            $table->unsignedBigInteger('role_id');
 
             $table->primary(['form_id', 'role_id']);
 
