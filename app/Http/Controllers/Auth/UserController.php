@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Request\Auth\SignupRequest;
 
 class UserController extends Controller
 {
-    public function signUp(Request $request)
+
+    public function signUp(SignupRequest $request)
     {
         $user = User::create($this->principalData($request->only('fullname', 'nickname', 'email', 'password')));
 

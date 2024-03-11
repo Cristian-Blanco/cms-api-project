@@ -27,6 +27,8 @@ sudo apt-get install -y php php-cli php-common php-mysql php-zip php-gd php-mbst
 
 sudo apt install -y php-dom libapache2-mod-php
 
+sudo a2enmod rewrite && sudo service apache2 restart
+
 # Allow URL rewrites
 sudo sed -i 's#AllowOverride None#AllowOverride All#' /etc/apache2/apache2.conf
 
